@@ -36,7 +36,7 @@ class ScrollablePositionedList extends StatefulWidget {
   const ScrollablePositionedList.builder({
     @required this.itemCount,
     @required this.itemBuilder,
-    this.frontScrollController = frontScrollController ?? ScrollController(),
+    this.frontScrollController,
     this.itemScrollController,
     ItemPositionsListener itemPositionsListener,
     this.initialScrollIndex = 0,
@@ -169,7 +169,7 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
     with TickerProviderStateMixin {
   final frontItemPositionNotifier = ItemPositionsNotifier();
   final backItemPositionNotifier = ItemPositionsNotifier();
-  final ScrollController frontScrollController;
+  ScrollController frontScrollController;
   final backScrollController = ScrollController();
   final frontOpacity =
       ProxyAnimation(const AlwaysStoppedAnimation<double>(1.0));
@@ -188,6 +188,7 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
   @override
   void initState() {
     super.initState();
+    frontScrollController = frontScrollController ?? ScrollController();
     frontTarget = widget.initialScrollIndex;
     backAlignment = widget.initialAlignment;
     widget.itemScrollController?._attach(this);
