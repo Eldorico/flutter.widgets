@@ -36,6 +36,7 @@ class ScrollablePositionedList extends StatefulWidget {
   const ScrollablePositionedList.builder({
     @required this.itemCount,
     @required this.itemBuilder,
+    this.frontScrollController = frontScrollController ?? ScrollController(),
     this.itemScrollController,
     ItemPositionsListener itemPositionsListener,
     this.initialScrollIndex = 0,
@@ -58,6 +59,9 @@ class ScrollablePositionedList extends StatefulWidget {
   /// Called to build children for the list with
   /// 0 <= index < itemCount.
   final IndexedWidgetBuilder itemBuilder;
+
+  /// Edited by eldorico
+  final ScrollController frontScrollController;
 
   /// Controller for jumping or scrolling to an item.
   final ItemScrollController itemScrollController;
@@ -116,13 +120,15 @@ class ScrollablePositionedList extends StatefulWidget {
   final bool addRepaintBoundaries;
 
   @override
-  State<StatefulWidget> createState() => _ScrollablePositionedListState();
+  State<StatefulWidget> createState() => _ScrollablePositionedListState(frontScrollController);
 }
 
 /// Controller to jump or scroll to a particular position in a
 /// [ScrollablePositionedList].
 class ItemScrollController {
   _ScrollablePositionedListState _scrollableListState;
+
+
 
   /// Immediately, without animation, reconfigure the list so that item at
   /// [index]'s leading edge is at the given [alignment].
@@ -163,10 +169,12 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
     with TickerProviderStateMixin {
   final frontItemPositionNotifier = ItemPositionsNotifier();
   final backItemPositionNotifier = ItemPositionsNotifier();
-  final frontScrollController = ScrollController();
+  final ScrollController frontScrollController;
   final backScrollController = ScrollController();
   final frontOpacity =
       ProxyAnimation(const AlwaysStoppedAnimation<double>(1.0));
+
+  _ScrollablePositionedListState(this.frontScrollController);
 
   int bottomTarget = 0;
   double bottomAlignment = 0;
