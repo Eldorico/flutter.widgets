@@ -14,6 +14,10 @@ abstract class ItemPositionsListener {
   /// [ScrollablePositionedList] to return the current position of items.
   factory ItemPositionsListener.create() => ItemPositionsNotifier();
 
+  double get customMaxExtend;
+  double set customMaxExtend(double customMaxExtend);
+  void resetCustomMaxExtend();
+
   /// The position of items that are at least partially visible in the viewport.
   ValueListenable<Iterable<ItemPosition>> get itemPositions;
 }
