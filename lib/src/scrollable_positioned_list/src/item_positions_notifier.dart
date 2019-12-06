@@ -11,25 +11,15 @@ class ItemPositionsNotifier implements ItemPositionsListener {
 
   // tweak by eldorico.
   double _customMaxExtend = -1;
-  bool _isCustomMaxExtendDefined = false;
 
   @override
   double get customMaxExtend => _customMaxExtend;
 
   @override
-  set customMaxExtend(double customMaxExtend){
-    _customMaxExtend = customMaxExtend;
-    _isCustomMaxExtendDefined = true;
-  }
+  set customMaxExtend(double customMaxExtend) => _customMaxExtend = customMaxExtend;
 
   @override
-  bool get isCustomMaxExtendDefined => _isCustomMaxExtendDefined;
-
-  @override
-  resetCustomMaxExtend() {
-    _customMaxExtend = -1;
-    _isCustomMaxExtendDefined = false;
-  }
+  resetCustomMaxExtend() => _customMaxExtend = -1;
 
   @override
   final ValueNotifier<Iterable<ItemPosition>> itemPositions = ValueNotifier([]);

@@ -15,8 +15,7 @@ abstract class ItemPositionsListener {
   factory ItemPositionsListener.create() => ItemPositionsNotifier();
 
   double get customMaxExtend;
-  set customMaxExtend(double customMaxExtend);
-  bool get isCustomMaxExtendDefined;
+  double set customMaxExtend(double customMaxExtend);
   void resetCustomMaxExtend();
 
   /// The position of items that are at least partially visible in the viewport.
