@@ -292,7 +292,7 @@ class _TaggedTextState extends State<TaggedText> {
         softWrap: widget.softWrap,
         overflow: widget.overflow,
         textScaleFactor: widget.textScaleFactor ??
-            MediaQuery.of(context, nullOk: true)?.textScaleFactor ??
+            MediaQuery.of(context)?.textScaleFactor ??
             1.0,
         maxLines: widget.maxLines);
   }
